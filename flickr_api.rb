@@ -13,8 +13,7 @@ class Flickr_Api
       method: "flickr.photos.search",
       api_key: @apikey,
       text: query,
-      safe_search: 1,
-      limit: 1,
+      safe_search: 2,
       format: "json"
     }
     uri.query = URI.encode_www_form(params)
@@ -32,6 +31,7 @@ class Flickr_Api
   end
 
   def get_first_image_for_text query
+    print query
     res = Net::HTTP.get_response(image_search_url(query))
     stripped_body = res.body.match(/^jsonFlickrApi\((.*)\)$/)[1]
     json = JSON[stripped_body]

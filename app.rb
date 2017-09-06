@@ -26,8 +26,18 @@ def top_ten_words tweets
     .take(10)
 end
 
+index_template =
+  "<% top.each do |word| %>
+    <p>
+      <%= word %>
+      <img src=\" <%= urls[word[0]] %> \"/>
+    </p>
+   <% end %>"
+
 get("/:username") {
   all_tweets = twitter_api.get_all_tweets_for_username(params[:username])
   top = top_ten_words(all_tweets)
-  top.to_s + top.map{ |word| Flickr_api.get_first_image_for_text word }.to_s
+  urls = Hash.new
+  top.map{ |word| urls[word[0]] = Flickr_api.get_first_image_for_text word[0] }
+  ERB.new(index_template).result(binding)
 }
