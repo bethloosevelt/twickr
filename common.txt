@@ -347,7 +347,7 @@ often
 tt
 stood
 power
-Now
+now
 room
 half
 public
@@ -407,6 +407,7 @@ high
 met
 says
 together
+amp;
 why
 perhaps
 death

@@ -1,5 +1,4 @@
 require "twitter"
-require_relative "config"
 
 class Twitter_Api
   def initialize
@@ -10,9 +9,11 @@ class Twitter_Api
       config.access_token_secret = "aGkPBv4gqczpzeaZaYtKHFYNn8iWE8QWYxV18IvmA3h2h"
     end
   end
+
   def get_latest_tweet
     return @client.search("hello", lang: "en").first.text
   end
+
   def get_all_tweets_for_username username
     @client.user_timeline(username, :count => 3200).map { |tweet|
       tweet = tweet.text
